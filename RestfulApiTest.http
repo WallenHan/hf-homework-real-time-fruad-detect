@@ -1,0 +1,39 @@
+### delivery the normal transaction
+POST http://{{host}}/v1/delivery/transaction
+Content-Type: application/json
+
+{
+  "amount": 23445532,
+  "sender": "sssdd_dsds",
+  "receiver": "dnxdhhs-m"
+}
+
+### delivery the fraud amount transaction
+POST http://{{host}}/v1/delivery/transaction
+Content-Type: application/json
+
+{
+  "amount": 23445333333333333332,
+  "sender": "sssdd_dsds",
+  "receiver": "dnxdhhs-m"
+}
+
+### delivery the fraud sender transaction
+POST http://{{host}}/v1/delivery/transaction
+Content-Type: application/json
+
+{
+  "amount": 3222222,
+  "sender": "mountA",
+  "receiver": "dnxdhhs-m"
+}
+
+### delivery the fraud reciever transaction
+POST http://{{host}}/v1/delivery/transaction
+Content-Type: application/json
+
+{
+  "amount": 3334,
+  "sender": "sssdd_dsds",
+  "receiver": "mountA"
+}
