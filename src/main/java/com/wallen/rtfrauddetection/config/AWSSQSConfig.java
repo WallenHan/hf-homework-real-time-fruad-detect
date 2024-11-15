@@ -17,6 +17,10 @@ public class AWSSQSConfig {
     @Value("${aws.sqs.apiSecret}")
     private String secretKey;
 
+    /**
+     * init the sqs client
+     * @return client sqsClient
+     */
     @Bean
     public AmazonSQS amazonSQSClient() {
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);

@@ -14,7 +14,7 @@ public class ApiResponse<T> {
     private T data;
 
     public  static <T>  ApiResponse<T> success(T data) {
-      return new ApiResponse<T>(200, "success", data);
+      return new ApiResponse<>(200, "success", data);
     }
 
     public static <T> ApiResponse<T> fail(int code, String message) {

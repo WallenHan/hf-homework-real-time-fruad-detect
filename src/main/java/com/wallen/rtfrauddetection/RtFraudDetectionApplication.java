@@ -11,6 +11,4 @@ public class RtFraudDetectionApplication {
     public static void main(String[] args) {
         SpringApplication.run(RtFraudDetectionApplication.class, args);
     }
-
-    // TODO 关于金额和人员名单的清单的初始化
 }

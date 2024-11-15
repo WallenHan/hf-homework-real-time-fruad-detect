@@ -7,7 +7,6 @@ import com.wallen.rtfrauddetection.data.ApiResponse;
 import com.wallen.rtfrauddetection.data.Transaction;
 import com.wallen.rtfrauddetection.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

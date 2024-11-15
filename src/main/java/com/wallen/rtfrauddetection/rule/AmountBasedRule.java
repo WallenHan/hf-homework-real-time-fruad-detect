@@ -4,7 +4,6 @@ import com.wallen.rtfrauddetection.data.Transaction;
 import lombok.Builder;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 
 @Builder
