@@ -13,15 +13,28 @@
 5. 将该jar放到任意目录下即可使用 `java -jar *.jar`来运行该项目
 
 ### 微调版
-当你需要调整 **金额阈值** 和 **涉及诈骗名单** 时，开发环境配置文件下请调整 
+当你需要调整 **金额阈值** 和 **涉及诈骗名单** 时，开发、测试环境本地验证时请配置文件`src/main/resources/application-dev.properties`下请调整 
 ```
 ## over amount
 rule.thresholdAmount=200000
 ## names
 rule.suspiciousAccounts=gaiby,mountA,masterOne
 ```
-### Docker 版本
+当需要生产部署时，请配置认证信息、新的队列和生产上的规则到`src/main/resources/application-pro.properties`文件中
+```
+aws.sqs.queueUrl= 【我是占位符】
+aws.res.apiKey= 【我是占位符】
+aws.res.apiSecret=【我是占位符】
+## over amount
+rule.thresholdAmount=200000
+## names
+rule.suspiciousAccounts=gaiby,mountA,masterOne
+```
+### Docker 部署
 待补充
-### k8s 版本
+### k8s 部署
 待补充
 ## 下一步规划
+- 实现将规则可以通过数据库配置，方便变更；
+- 增加后台管理，可以通过鉴权后的web页面方便业务人员更新规则；
+- 进一步考虑多个规则组合的情况，支持规则组合检测，例如，转给 xxx 且金额是 xxx 是可能涉及诈骗。
