@@ -3,7 +3,8 @@ package com.wallen.rtfrauddetection.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.*;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
@@ -17,25 +18,27 @@ public class AWSResConfig {
 
 
     /**
-     * init the sqs client
-     * @return client sqsClient
-     */
-    @Bean
-    public SqsClient amazonSQSClient() {
-        AwsBasicCredentials awsCredentials =  AwsBasicCredentials.create(accessKey, secretKey);
-        return SqsClient.builder()
-                .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
-                .region(Region.US_EAST_2)
-                .build();
-    }
-
-    /**
-     *  init  basicAWSCredential
+     * init  basicAWSCredential
+     *
      * @return basicAWSCredentials AWSCredentials
      */
     @Bean
     public AwsBasicCredentials credentialForAWS() {
         return AwsBasicCredentials.create(accessKey, secretKey);
+    }
+
+
+    /**
+     * init the sqs client
+     *
+     * @return client sqsClient
+     */
+    @Bean
+    public SqsClient amazonSQSClient(AwsBasicCredentials credentialForAWS) {
+        return SqsClient.builder()
+                .credentialsProvider(StaticCredentialsProvider.create(credentialForAWS))
+                .region(Region.US_EAST_2)
+                .build();
     }
 
 }

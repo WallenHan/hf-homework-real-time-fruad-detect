@@ -55,7 +55,7 @@ public class MessageProcessJob implements ApplicationRunner {
                     messageResponse.messages().forEach(message -> {
                         log.info("Message received: {}", message.body());
                         ObjectMapper objectMapper = new ObjectMapper();
-                        Transaction transaction = null;
+                        Transaction transaction;
                         try {
                             transaction = objectMapper.readValue(message.body(), Transaction.class);
                         } catch (JsonProcessingException e) {
