@@ -1,14 +1,14 @@
 package com.wallen.rtfrauddetection.controller;
 
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
-import com.amazonaws.services.sqs.model.SendMessageResult;
 import com.wallen.rtfrauddetection.data.ApiResponse;
 import com.wallen.rtfrauddetection.data.Transaction;
 import com.wallen.rtfrauddetection.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import software.amazon.awssdk.services.sqs.SqsClient;
+import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+import software.amazon.awssdk.services.sqs.model.SendMessageResponse;
 
 import java.util.UUID;
 
@@ -17,23 +17,25 @@ import java.util.UUID;
 public class TransactionController {
 
 
-     private final AmazonSQS sqs;
+     private final SqsClient sqs;
      @Value("${aws.sqs.queueUrl}")
      private String queueUrl;
 
-     public TransactionController(AmazonSQS sqs) {
+     public TransactionController(SqsClient sqs) {
           this.sqs = sqs;
      }
 
      @PostMapping("/transaction")
      public ResponseEntity<ApiResponse<?>> deliveryTransaction(@RequestBody Transaction transaction) {
 
-          SendMessageRequest sendMessageRequest = new SendMessageRequest().withQueueUrl(queueUrl)
-                  .withMessageBody(JSONUtil.toJsonString(transaction))
-                  .withMessageGroupId("unchecked-transaction")
-                  .withMessageDeduplicationId(UUID.randomUUID().toString());
-          SendMessageResult result = sqs.sendMessage(sendMessageRequest);
-          return ResponseEntity.ok(ApiResponse.success(result.getSdkResponseMetadata()));
+          SendMessageRequest sendMessageRequest = SendMessageRequest.builder()
+                  .queueUrl(queueUrl)
+                  .messageBody(JSONUtil.toJsonString(transaction))
+                  .messageGroupId("unchecked-transaction")
+                  .messageDeduplicationId(UUID.randomUUID().toString())
+                  .build();
+          SendMessageResponse response = sqs.sendMessage(sendMessageRequest);
+          return ResponseEntity.ok(ApiResponse.success(response.messageId()));
      }
 
 }

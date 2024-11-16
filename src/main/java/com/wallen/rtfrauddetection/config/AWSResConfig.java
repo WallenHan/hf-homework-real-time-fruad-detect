@@ -1,13 +1,11 @@
 package com.wallen.rtfrauddetection.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.*;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
 public class AWSResConfig {
@@ -23,11 +21,11 @@ public class AWSResConfig {
      * @return client sqsClient
      */
     @Bean
-    public AmazonSQS amazonSQSClient() {
-        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
-        return AmazonSQSClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withRegion(Regions.EU_CENTRAL_1)
+    public SqsClient amazonSQSClient() {
+        AwsBasicCredentials awsCredentials =  AwsBasicCredentials.create(accessKey, secretKey);
+        return SqsClient.builder()
+                .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
+                .region(Region.US_EAST_2)
                 .build();
     }
 
@@ -36,8 +34,8 @@ public class AWSResConfig {
      * @return basicAWSCredentials AWSCredentials
      */
     @Bean
-    public BasicAWSCredentials basicAWSCredentials() {
-        return new BasicAWSCredentials(accessKey, secretKey);
+    public AwsBasicCredentials credentialForAWS() {
+        return AwsBasicCredentials.create(accessKey, secretKey);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.wallen.rtfrauddetection.service;
 
 
-import com.amazonaws.services.sqs.AmazonSQS;
 import com.wallen.rtfrauddetection.data.Transaction;
 import com.wallen.rtfrauddetection.rule.AmountBasedRule;
 import com.wallen.rtfrauddetection.rule.FraudRule;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class FraudDetectionService {
     private final List<FraudRule> fraudRules;
     private final NotificationService notificationService;
 
-    public FraudDetectionService(List<FraudRule> fraudRules, AmazonSQS client, @Qualifier("compositeNotificationService") NotificationService notificationService) {
+    public FraudDetectionService(List<FraudRule> fraudRules, @Qualifier("compositeNotificationService") NotificationService notificationService) {
         this.fraudRules = fraudRules;
         this.notificationService = notificationService;
     }
