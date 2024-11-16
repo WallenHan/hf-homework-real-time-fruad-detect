@@ -10,12 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AWSSQSConfig {
-    @Value("${aws.sqs.apiKey}")
+public class AWSResConfig {
+    @Value("${aws.res.apiKey}")
     private String accessKey;
 
-    @Value("${aws.sqs.apiSecret}")
+    @Value("${aws.res.apiSecret}")
     private String secretKey;
+
 
     /**
      * init the sqs client
@@ -28,6 +29,15 @@ public class AWSSQSConfig {
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .withRegion(Regions.EU_CENTRAL_1)
                 .build();
+    }
+
+    /**
+     *  init  basicAWSCredential
+     * @return basicAWSCredentials AWSCredentials
+     */
+    @Bean
+    public BasicAWSCredentials basicAWSCredentials() {
+        return new BasicAWSCredentials(accessKey, secretKey);
     }
 
 }
