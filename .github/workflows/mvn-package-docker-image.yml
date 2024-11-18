@@ -1,0 +1,40 @@
+name: package and make image CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v2
+      with:
+        java-version: '21'
+        distribution: 'adopt'
+        java-package: 'jdk'
+        architecture: 'x64'
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build . -t wallen/rt_fraud_detect
+
+    - name: Tag Docker image
+      run: docker tag wallen/rt_fraud_detect:latest wallen/rt_fraud_detect:${{ github.sha }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push wallen/rt_fraud_detect:latest
+
+    - name: Push Docker image with tag
+      run: docker push wallen/rt_fraud_detect:${{ github.sha }}
