@@ -18,7 +18,7 @@
 [![Watch the video](https://vumbnail.com/VIDEO_ID.jpg)](https://vimeo.com/VIDEO_ID)
 
 ### 调整配置
-当你需要调整 **金额阈值** 和 **涉及诈骗名单** 时，开发、测试环境本地验证时请配置文件`src/main/resources/application-dev.properties`下请调整 
+当你需要调整 **金额阈值** 和 **涉及诈骗名单** 时，开发、测试环境本地验证时请在配置文件`src/main/resources/application-dev.properties`下请调整 
 ```
 ## over amount
 rule.thresholdAmount=200000
