@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.event.annotation.PrepareTestInstance;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.services.sqs.SqsClient;
@@ -15,11 +19,18 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
+@ContextConfiguration(classes = RtFraudDetectionApplication.class)
 class RtFraudDetectionApplicationTests {
 
-    @Autowired
-    private ApplicationContext context;
+    private static ConfigurableApplicationContext context;
 
+
+    private SpringApplicationBuilder builder;
+
+    @BeforeAll
+    static void setUp() {
+        context = new  SpringApplicationBuilder().sources(RtFraudDetectionApplication.class).environment(new StandardEncryptableEnvironment()).run();
+    }
 
     @Test
     void contextLoads() {
