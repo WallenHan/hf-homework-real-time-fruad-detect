@@ -1,9 +1,7 @@
 name: package and make image CI
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build:
