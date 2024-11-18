@@ -33,11 +33,11 @@ jobs:
 
 
     - name: Push Docker image to Docker Hub
-      run: docker push wallen/rt_fraud_detect:latest
+      run: docker push wallenhan/rt_fraud_detect:latest
 
     - name: Tag Docker image
-      run: docker tag wallen/rt_fraud_detect:latest wallen/rt_fraud_detect:${{ github.sha }}
+      run: docker tag wallenhan/rt_fraud_detect:latest wallen/rt_fraud_detect:${{ github.sha }}
 
 
     - name: Push Docker image with tag
-      run: docker push wallen/rt_fraud_detect:${{ github.sha }}
+      run: docker push wallenhan/rt_fraud_detect:${{ github.sha }}
