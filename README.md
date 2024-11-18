@@ -31,9 +31,13 @@ rule.thresholdAmount=200000
 rule.suspiciousAccounts=gaiby,mountA,masterOne
 ```
 ### Docker 部署
-待补充
+- 国内部署可能有障碍，请参考互联网搜索加镜像源同步镜像。
+- 启动命令
+  ```
+  docker run -d -p 8080:8080 --restart always wallen/rt_fraud_detect:latest --spring.profiles.active=dev 
+  ```
 ### k8s 部署
-待补充
+详见(部署清单)[./deployment.yaml]
 
 ## 安全问题
 pom xml中移除处理了有安全问题的依赖，应随时定义注意安全问题，避免引入有安全问题的依赖。
