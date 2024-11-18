@@ -31,7 +31,7 @@ jobs:
       run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
     - name: Build Docker image
-      run: docker build . -t wallen/rt_fraud_detect
+      run: docker build . -t wallenhan/rt_fraud_detect
 
     - name: Tag Docker image
       run: docker tag wallen/rt_fraud_detect:latest wallen/rt_fraud_detect:${{ github.sha }}
