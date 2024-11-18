@@ -1,0 +1,38 @@
+<configuration>
+    <springProperty  name="LOG_PATTERN"   source="log.pattern"/>
+    <springProperty name="LOG_LEVEL" source="log.level"/>
+    <springProperty name="REGION" source="aws.res.region"/>
+    <springProperty name="LOG_GROUP" source="aws.cw.logGroup"/>
+    <springProperty name="LOG_STREAM" source="aws.cw.logStream"/>
+    <springProperty name="KEY_ID" source="aws.res.apiKey"/>
+    <springProperty name="ACCESS_KEY" source="aws.res.apiSecret"/>
+
+
+    <appender name="CLOUDWATCH" class="ca.pjer.logback.AwsLogsAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${LOG_PATTERN}</pattern>
+        </layout>
+        <accessKeyId>${KEY_ID}</accessKeyId>
+        <secretAccessKey>${ACCESS_KEY}</secretAccessKey>
+        <logRegion>${REGION}</logRegion>
+        <logGroupName>${LOG_GROUP}</logGroupName>
+        <logStreamUuidPrefix>${LOG_STREAM}_</logStreamUuidPrefix>
+    </appender>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="CLOUDWATCH"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+</configuration>
