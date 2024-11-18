@@ -15,20 +15,20 @@ class AmountBasedRuleTest {
      */
     @Test
     void isFraudulent() {
-        Transaction transaction = Transaction.builder()
+        AmountBasedRule rule = AmountBasedRule.builder()
+                .threshold(BigDecimal.valueOf(199999))
+                .build();
+        Transaction transactionA = Transaction.builder()
                 .amount(BigDecimal.valueOf(200000))
                 .receiver("xxxxx")
                 .sender("abcss")
                 .build();
-        AmountBasedRule rule = AmountBasedRule.builder()
-                .threshold(BigDecimal.valueOf(199999))
-                .build();
-        assertTrue(rule.isFraudulent(transaction));
-        Transaction transactionA = Transaction.builder()
+        assertTrue(rule.isFraudulent(transactionA));
+        Transaction transactionB = Transaction.builder()
                 .amount(BigDecimal.valueOf(199998))
                 .receiver("xxxxx")
                 .sender("abcss")
                 .build();
-        assertFalse(rule.isFraudulent(transaction));
+        assertFalse(rule.isFraudulent(transactionB));
     }
 }

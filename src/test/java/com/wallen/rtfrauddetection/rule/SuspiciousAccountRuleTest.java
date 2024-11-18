@@ -32,13 +32,13 @@ class SuspiciousAccountRuleTest {
                 .receiver("bb")
                 .amount(BigDecimal.valueOf(200))
                 .build();
-        assertFalse(suspiciousAccountRule.isFraudulent(transactionB));
+        assertTrue(suspiciousAccountRule.isFraudulent(transactionB));
         Transaction transactionC = Transaction.builder()
                 .sender("aaa")
                 .receiver("bbb")
                 .amount(BigDecimal.valueOf(200))
                 .build();
-        assertFalse(suspiciousAccountRule.isFraudulent(transactionC));
+        assertTrue(suspiciousAccountRule.isFraudulent(transactionC));
         Transaction transactionD = Transaction.builder()
                 .sender("aa")
                 .receiver("bb")
