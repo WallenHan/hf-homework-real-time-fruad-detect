@@ -3,7 +3,7 @@ name: package and make image CI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
