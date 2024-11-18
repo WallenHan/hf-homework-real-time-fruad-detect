@@ -16,6 +16,9 @@ public class AWSResConfig {
     @Value("${aws.res.apiSecret}")
     private String secretKey;
 
+    @Value("${aws.res.region}")
+    private String region;
+
 
     /**
      * init  basicAWSCredential
@@ -37,7 +40,7 @@ public class AWSResConfig {
     public SqsClient amazonSQSClient(AwsBasicCredentials credentialForAWS) {
         return SqsClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(credentialForAWS))
-                .region(Region.US_EAST_2)
+                .region(Region.of(region))
                 .build();
     }
 
