@@ -10,7 +10,7 @@ COPY target/*.jar app.jar
 # 暴露应用程序运行的端口
 EXPOSE 8080
 
-# 运行 Spring Boot 应用程序，并动态指定 spring.profiles.active 参数
+# 运行 Spring Boot 应用程序，并动态指定 spring.profiles.active 参数, 默认是 dev
 ENTRYPOINT ["java", "-jar", "app.jar"]
 CMD ["--spring.profiles.active=dev"]
 
