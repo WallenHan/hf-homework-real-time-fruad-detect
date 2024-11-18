@@ -1,5 +1,5 @@
 # 使用官方的 OpenJDK 21 运行时镜像作为基础镜像
-FROM adoptopenjdk:21-jre-hotspot
+FROM eclipse-temurin:21-jre
 
 # 设置工作目录
 WORKDIR /app
