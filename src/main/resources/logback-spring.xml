@@ -7,7 +7,6 @@
     <springProperty name="KEY_ID" source="aws.res.apiKey"/>
     <springProperty name="ACCESS_KEY" source="aws.res.apiSecret"/>
 
-
     <appender name="CLOUDWATCH" class="ca.pjer.logback.AwsLogsAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${LOG_PATTERN}</pattern>
