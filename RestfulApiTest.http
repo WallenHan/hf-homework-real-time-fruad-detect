@@ -3,7 +3,7 @@ POST http://{{host}}/v1/delivery/transaction
 Content-Type: application/json
 
 {
-  "amount": 23445532,
+  "amount": 234452,
   "sender": "sssdd_dsds",
   "receiver": "dnxdhhs-m"
 }
