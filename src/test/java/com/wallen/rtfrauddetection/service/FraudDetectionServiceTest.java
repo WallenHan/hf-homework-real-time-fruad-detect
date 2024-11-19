@@ -21,9 +21,9 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(OutputCaptureExtension.class)
-@SpringBootTest
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 @TestPropertySource(properties = {"rule.thresholdAmount=1000", "rule.suspiciousAccounts=xbc,xxxsscv"})
-class FraudDetectionServiceTests {
+class FraudDetectionServiceTest {
     @Mock
     private List<FraudRule> fraudRules;
     @Mock

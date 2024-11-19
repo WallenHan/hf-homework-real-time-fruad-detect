@@ -22,7 +22,7 @@ import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(OutputCaptureExtension.class)
-@SpringBootTest
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 class MessageProcessJobTest {
 
     @Mock

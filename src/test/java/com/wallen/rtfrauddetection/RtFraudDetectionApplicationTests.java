@@ -18,19 +18,13 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-@ContextConfiguration(classes = RtFraudDetectionApplication.class)
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 class RtFraudDetectionApplicationTests {
 
-    private static ConfigurableApplicationContext context;
+    @Autowired
+    private ConfigurableApplicationContext context;
 
 
-    private SpringApplicationBuilder builder;
-
-    @BeforeAll
-    static void setUp() {
-        context = new  SpringApplicationBuilder().sources(RtFraudDetectionApplication.class).environment(new StandardEncryptableEnvironment()).run();
-    }
 
     @Test
     void contextLoads() {
