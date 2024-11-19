@@ -15,7 +15,7 @@
 5. 将该jar放到任意目录下即可使用 `java -jar *.jar`来运行该项目
 
 ### 视频说明
-[![Watch the video](https://vumbnail.com/VIDEO_ID.jpg)](https://vimeo.com/VIDEO_ID)
+[![Watch the video](https://vumbnail.com/VIDEO_ID.jpg)](https://vimeo.com/1031088467)
 
 ### 调整配置
 当你需要调整 **金额阈值** 和 **涉及诈骗名单** 时，开发、测试环境本地验证时请在配置文件`src/main/resources/application-dev.properties`下请调整 
